@@ -30,7 +30,7 @@ cd i-msa-misc
 
 3. **Write in-line documentation.** Add comments to clarify or provide commentary on segments of code. Functions should have always have docstrings. For simple functions these can just be one-liners.
 
-4. **Write a README for each top-level folder**. We need to know what the work in that project is achieving.
+4. **Write a README for each top-level folder**. We need to know what the purpose of the code in each folder.
 
 5. **Commit changes with clear, descriptive messages**:
     ```bash
