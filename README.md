@@ -1,11 +1,11 @@
 # i-msa-misc
 A catch-all repository for analysis undertaken at MSA.
 
-Use this repository when you are conducting one-off analysis. Please use a standalone repository for work that belongs to a dedicated workstream.
+Use this repository for one-off code or analysis. Please use a standalone repository for work that belongs to a dedicated workstream.
 
 ## Organization
 
-We organize separate workstreams into folders. Each top-level folder under `i-msa-misc` should be governed by a well-defined and reproducible development environment. [Poetry](https://python-poetry.org/) is a helpful tool for package and dependency management when using python.
+We organize separate one-off projects into folders under `i-msa-msc`. Each folder should be governed by a well-defined and reproducible development environment. [Poetry](https://python-poetry.org/) is a helpful tool for package and dependency management when using python.
 
 ## Contributing
 
