@@ -1,7 +1,7 @@
 # i-msa-misc
-A repository for miscellaneous analysis undertaken under MSA.
+A catch-all repository for analysis undertaken at MSA.
 
-Use this repository when you are conducting standalone analysis at MSA that isn't its own independent project.
+Use this repository when you are conducting one-off analysis. Please use a standalone repository for work that belongs to a dedicated workstream.
 
 ## Organization
 
@@ -45,6 +45,6 @@ cd i-msa-misc
     git push origin your-branch-name
     ```
 2. **Create a pull request** on GitHub from your branch to the branch you want to merge into. This is usually the branch you split from.
-3. **Tag another contributor to review your PR**. Also write a clear title and description of your changes
+3. **Tag another contributor to review your PR**. Also write a clear title and description of your changes.
 4. **At least one other contributor should review and approve** your pull request before it can be merged. Make requested changes in additional commits on the same branch.
 5. **Generally use the "Squash and merge" option** to merge your PR. This will help us keep the git history easy to review. Occassionally we may want the full branch history on the main branch, in which case you can do a simple merge.
