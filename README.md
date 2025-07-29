@@ -5,7 +5,7 @@ Use this repository when you are conducting standalone analysis at MSA that isn'
 
 ## Organization
 
-We organize separate workstreams into folders. Each folder under `i-msa-misc` should be governed by a well-defined and reproducible development environment. [Poetry](https://python-poetry.org/) is a helpful tool for package and dependency management when using python.
+We organize separate workstreams into folders. Each top-level folder under `i-msa-misc` should be governed by a well-defined and reproducible development environment. [Poetry](https://python-poetry.org/) is a helpful tool for package and dependency management when using python.
 
 ## Contributing
 
