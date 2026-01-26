@@ -1,0 +1,175 @@
+---
+title: "Expected cost-effectiveness of PPE for respiratory pandemics in LMICs"
+author: "Sebastian Quaade and ChatGPT"
+date: "`r format(Sys.Date())`"
+output:
+  pdf_document: default
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.width = 7, fig.height = 5
+)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(pracma)
+library(scales)
+```
+
+# 1. Overview
+
+**Goal**: Crudely estimate the cost-effectiveness (CE) of LMIC PPE stockpiling to prepare for zoonotic respiratory pandemics, measured in terms dollars per healthcare worker (HCW) life saved per year.
+
+Main ingredients:
+
+- Baseline cost-effectiveness of PPE during COVID-19: $4,309 per HCW life ([Risko et al.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240503))[^1].
+- Pandemic severity *s* measured as deaths per 10,000 population.
+- Annual risk that a respiratory pandemic of severity *s* or more emerges. This is also known as the *exceedance function*, and is denoted by $E(s)=Pr(S\geq s)$ ([Madhav et al.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240503)).
+
+To avoid taking the expectation over an reciprocal, we work with lives per dollar (LPD), rather than dollars per healthcare worker lives. We define a conservative scaling for healthcare worker lives saved per dollar as a function of severity S:
+
+- For $S \leq S_{COVID}$: linear improvement with S.
+- For $S > S_{COVID}$: square-root improvement with S.
+
+
+Formally, this is
+\[
+\text{LPD}(S) =
+\begin{cases}
+\text{LPD}_{\text{COVID}} \displaystyle\frac{S}{S_{\text{COVID}}}, & S \le S_{\text{COVID}}, \\[10pt]
+\text{LPD}_{\text{COVID}} \displaystyle\sqrt{\frac{S}{S_{\text{COVID}}}}, & S > S_{\text{COVID}}.
+\end{cases}
+\]
+
+This tempers the effectiveness of PPE in extremely severe pandemics.
+
+Expected HCW lives saved per year is:
+
+$$\text{LPD}_{\text{year}} = \int LPD(s) f(s) ds,\quad \text{where } f(s) = -E'(s)$$.
+
+We calculate $ per expected life saved per year as $\frac{1}{\mathbb{E}[\text{LPD}_year]}$. Note that this is not the same as expected dollars per life saved per year, due to the nonlinearity of taking the reciprocal.
+
+Then, assuming PPE can be stockpiled for ten years, I we integrate cost-effectiveness of stockpiles over a ten-year horizon using a discount rate $\beta=0.03$, i.e. 
+
+$$\text{LPD}_{10\,\text{years}} = \sum_{t=0}^9  \frac{\text{LPD}_{\text{year}}}{(1+\beta)^t}$$.
+
+This assumes the independence of annual exceedance risks; I have not thought carefully about how problematic this assumption might be. Note that I do not account for the cost of maintaining the stockpile.
+
+# 2. Inputs
+
+```{r inputs}
+CE_COVID_dollars_per_life <- 4309
+LPD_COVID <- 1 / CE_COVID_dollars_per_life
+severity_COVID <- 14.86e6 / (7.86e9 / 1e4)
+
+T_years <- 10
+discount_rate <- 0.03
+
+LPD_COVID; severity_COVID; T_years; discount_rate
+```
+
+# 3. Exceedance data (Madhav et al.)
+
+```{r read-data}
+mraw <- read_csv("../data/raw/madhav_et_al_figure_4_digitized.csv", show_col_types = FALSE)
+mx <- mraw[-1, c(1, 2)]
+colnames(mx) <- c("deaths_per_10k", "annual_risk_percent")
+
+mx <- mx %>%
+  mutate(
+    deaths_per_10k = as.numeric(deaths_per_10k),
+    annual_risk    = as.numeric(annual_risk_percent) / 100
+  ) %>%
+  arrange(deaths_per_10k)
+```
+
+# 4. Fit a smooth exceedance E(d)
+
+```{r fit-exceedance}
+severity_grid <- seq(min(mx$deaths_per_10k), max(mx$deaths_per_10k), length.out = 1000)
+E_spline <- splinefun(x = mx$deaths_per_10k, y = mx$annual_risk, method = "monoH.FC")
+E_grid <- E_spline(severity_grid)
+
+ggplot() +
+  geom_point(data = mx, aes(deaths_per_10k, annual_risk), size = 1.5) +
+  geom_line(aes(severity_grid, E_grid), linewidth = 1) +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(x = "Deaths per 10k (d)", y = "Annual exceedance E(d) = P(D > d)",
+       title = "Madhav exceedance: data and monotone spline") +
+  theme_minimal()
+```
+
+# 5. Define LPD(D): conservative scaling
+
+```{r lpd-scaling}
+LPD_at_severity <- function(severity, LPD_covid = LPD_COVID, severity_covid = severity_COVID) {
+  ifelse(
+    severity <= severity_covid,
+    LPD_covid * (severity / severity_covid),
+    LPD_covid * sqrt(severity / severity_covid)
+  )
+}
+
+ggplot(data.frame(severity = severity_grid)) +
+  geom_line(aes(severity, LPD_at_severity(severity))) +
+  labs(x = "Deaths per 10k (D)", y = "Lives per $ (LPD)",
+       title = "LPD(D): linear below COVID severity, sqrt above") +
+  theme_minimal()
+```
+
+# 6. Unconditional pdf and annual event probability
+
+```{r pdf-unconditional}
+dE <- gradient(E_grid, severity_grid)
+f_uncond <- -dE
+p_event <- trapz(severity_grid, f_uncond)
+p_event
+```
+
+# 7. Unconditional CE per year
+
+```{r ce-unconditional}
+LPD_grid <- LPD_at_severity(severity_grid)
+LPD_year <- trapz(severity_grid, LPD_grid * f_uncond)
+CE_uncond_per_year <- 1 / LPD_year
+
+data.frame(
+  annual_event_probability = p_event,
+  lives_per_dollar_per_year = LPD_year,
+  dollars_per_life_per_year = CE_uncond_per_year
+)
+```
+
+# 8. Aggregate over T years (with discounting)
+
+```{r multi-year}
+beta <- 1 / (1 + discount_rate)
+weights <- beta^(0:(T_years - 1))
+PV_lives   <- sum(weights * LPD_year)
+CE_uncond_Tyear <- 1 / PV_lives
+
+PV_lives; CE_uncond_Tyear
+```
+
+# 9. Notes
+
+Sources:
+
+- PPE cost-effectiveness of PPE in LMICs during COVID-19: [Risko et al. 2020](https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0240503&type=printable)
+- Pandemic mortality exceedance curve: Madhav et al. [Madhav et al. 2023](https://www.cgdev.org/publication/estimated-future-mortality-pathogens-epidemic-and-pandemic-potential).
+- COVID severity proxy: WHO excess deaths 2020–2021([Msemburi et al. 2023](https://pubmed.ncbi.nlm.nih.gov/36517599/)) and 2020 global population ([World Bank](https://pubmed.ncbi.nlm.nih.gov/36517599/)).
+
+Assumptions:
+
+- Annual exceedance function represents stationary risk per year.
+- LPD scaling increases with severity, linearly below COVID and by the square root above.
+- Costs are incurred every year; expected lives saved are probabilistic.
+- Under stationarity, multi-year CE = per-year CE.
+
+[^1]: [Risko et al.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240503) estimate benefits over a 30-week period, rather than a full year.

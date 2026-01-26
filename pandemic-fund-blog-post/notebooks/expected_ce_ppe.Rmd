@@ -1,0 +1,134 @@
+---
+title: "Expected cost-effectiveness of PPE for respiratory pandemics in LMICs"
+author: "Your Name"
+date: "`r format(Sys.Date())`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, message = FALSE, warning = FALSE,
+  fig.width = 7, fig.height = 5
+)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(pracma)
+library(isotone)
+```
+
+# 1. Goal and set-up
+
+We estimate the expected cost-effectiveness of pre-positioned PPE in terms of dollars per HCW life saved. To do so, we combine:
+
+1) A baseline LMIC PPE CE estimate during COVID-19 ([source](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240503)),  
+   \[
+   \mathrm{CE}_{\text{COVID}} \approx \$4{,}309 \text{ per HCW life}.
+   \]
+
+2) A distribution of mortailty risk from respiratory pandemics (deaths per 10k population, \(D\)) from [Madhav et al.](https://www.cgdev.org/publication/estimated-future-mortality-pathogens-epidemic-and-pandemic-potential), summarized by the **exceedance function**  
+   \[
+   E(d) = \Pr(D \ge d).
+   \]
+
+We assume that PPE cost-effectiveness decreases with pandemic severity \(D\). To be conservative, we let CE fall linearly with \(D\) below COVID severity and only with the square-root above it:
+
+\[
+\mathrm{CE}(D) =
+\begin{cases}
+\mathrm{CE}_{\text{COVID}} \;\dfrac{D_{\text{COVID}}}{D}, & D \le D_{\text{COVID}} \\[8pt]
+\mathrm{CE}_{\text{COVID}} \;\sqrt{\dfrac{D_{\text{COVID}}}{D}}, & D > D_{\text{COVID}}.
+\end{cases}
+\]
+
+```{r inputs}
+CE_COVID <- 1 / 4309
+severity_COVID  <- 14.86e6 / (7.86e9 / 1e4) # Excess deaths between 2020-2021 (WHO) divided by 2020 global population
+CE_COVID; severity_COVID
+```
+
+```{r read-data}
+mraw <- read_csv("./data/raw/madhav_et_al_figure_4_digitized.csv", show_col_types = FALSE)
+mx <- mraw[-1, c(1, 2)]
+colnames(mx) <- c("deaths_per_10k", "annual_risk_percent")
+
+mx <- mx %>%
+  mutate(
+    deaths_per_10k = as.numeric(deaths_per_10k),
+    annual_risk    = as.numeric(annual_risk_percent) / 100
+  ) %>%
+  arrange(deaths_per_10k)
+```
+
+# 2. Fit exceedance function
+
+```{r fit-exceedance}
+severity_grid <- seq(min(mx$deaths_per_10k), max(mx$deaths_per_10k), length.out = 800)
+spline_fit <- splinefun(x = mx$deaths_per_10k, y = mx$annual_risk)
+approx_fit <- approxfun(mx$deaths_per_10k, mx$annual_risk, rule = 2)
+
+spline_pred <- spline_fit(severity_grid)
+approx_pred <- approx_fit(severity_grid)
+
+ggplot() +
+  geom_point(data = mx, aes(deaths_per_10k, annual_risk), size = 1.5) +
+  geom_line(aes(severity_grid, spline_pred, color = "Spline"), linewidth = 1) +
+  geom_line(aes(severity_grid, approx_pred, color = "Approx"), linewidth = 1, linetype = "dashed") +
+  scale_color_manual(values = c("Spline" = "blue", "Approx" = "red")) +
+  labs(
+    x = "Deaths per 10k",
+    y = "% Annual risk",
+    title = "Exceedance curve",
+    color = "Fit"
+  ) +
+  theme_minimal()
+```
+
+Both interpolation techniques fit the data very precisely. We will move forward with approximate for simplicity.
+
+# 3. CE scaling function
+
+```{r ce-scaling}
+CE_at_severity <- function(severity) {
+  ifelse(
+    severity <= severity_COVID,
+    CE_COVID * (severity / severity_COVID),
+    CE_COVID * sqrt(severity / severity_COVID)
+  )
+}
+
+ggplot(data.frame(severity = severity_grid)) +
+  geom_line(aes(severity, CE_at_severity(severity))) +
+  labs(x = "Deaths per 10k", y = "Cost-effectiveness [$ per HCW life]",
+       title = "Piecewise CE scaling (linear below, sqrt above)") +
+  theme_minimal()
+```
+
+# 4. Approach A — PDF route
+
+```{r pdf-route}
+exceedance_deriv <- gradient(approx_pred, severity_grid)
+fseverity_grid <- -exceedance_deriv
+p_event <- trapz(severity_grid, fseverity_grid) # Should be around 0.058
+
+CE_grid <- CE_at_severity(severity_grid)
+CE_uncond  <- trapz(severity_grid, CE_grid * fseverity_grid)
+```
+
+# Aggregate over 20 year time ----------
+
+```{r}
+years <- 20 # Number of years of protection
+discount_rate <- 0.04
+
+beta <- 1 / (1 + discount_rate)
+discount_weights <- beta^(0:(years - 1))
+
+PV_ce <- sum(discount_weights) * CE_uncond
+1 / PV_ce
+```
