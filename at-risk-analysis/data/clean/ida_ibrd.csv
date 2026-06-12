@@ -1,0 +1,146 @@
+Code,Economy,Region,Income group,Lending category,ida,ibrd
+AFG,Afghanistan,"Middle East, North Africa, Afghanistan & Pakistan",Low income,IDA,True,False
+ALB,Albania,Europe & Central Asia,Upper middle income,IBRD,False,True
+DZA,Algeria,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,IBRD,False,True
+AGO,Angola,Sub-Saharan Africa,Lower middle income,IBRD,False,True
+ATG,Antigua and Barbuda,Latin America & Caribbean,High income,IBRD,False,True
+ARG,Argentina,Latin America & Caribbean,Upper middle income,IBRD,False,True
+ARM,Armenia,Europe & Central Asia,Upper middle income,IBRD,False,True
+AZE,Azerbaijan,Europe & Central Asia,Upper middle income,IBRD,False,True
+BGD,Bangladesh,South Asia,Lower middle income,IDA,True,False
+BRB,Barbados,Latin America & Caribbean,High income,IBRD,False,True
+BLR,Belarus,Europe & Central Asia,Upper middle income,IBRD,False,True
+BLZ,Belize,Latin America & Caribbean,Upper middle income,Blend,True,True
+BEN,Benin,Sub-Saharan Africa,Lower middle income,IDA,True,False
+BTN,Bhutan,South Asia,Lower middle income,IDA,True,False
+BOL,Bolivia,Latin America & Caribbean,Lower middle income,IBRD,False,True
+BIH,Bosnia and Herzegovina,Europe & Central Asia,Upper middle income,IBRD,False,True
+BWA,Botswana,Sub-Saharan Africa,Upper middle income,IBRD,False,True
+BRA,Brazil,Latin America & Caribbean,Upper middle income,IBRD,False,True
+BGR,Bulgaria,Europe & Central Asia,High income,IBRD,False,True
+BFA,Burkina Faso,Sub-Saharan Africa,Low income,IDA,True,False
+BDI,Burundi,Sub-Saharan Africa,Low income,IDA,True,False
+CPV,Cabo Verde,Sub-Saharan Africa,Upper middle income,Blend,True,True
+KHM,Cambodia,East Asia & Pacific,Lower middle income,IDA,True,False
+CMR,Cameroon,Sub-Saharan Africa,Lower middle income,Blend,True,True
+CAF,Central African Republic,Sub-Saharan Africa,Low income,IDA,True,False
+TCD,Chad,Sub-Saharan Africa,Low income,IDA,True,False
+CHL,Chile,Latin America & Caribbean,High income,IBRD,False,True
+CHN,China,East Asia & Pacific,Upper middle income,IBRD,False,True
+COL,Colombia,Latin America & Caribbean,Upper middle income,IBRD,False,True
+COM,Comoros,Sub-Saharan Africa,Lower middle income,IDA,True,False
+COD,"Congo, Dem. Rep.",Sub-Saharan Africa,Low income,IDA,True,False
+COG,"Congo, Rep.",Sub-Saharan Africa,Lower middle income,Blend,True,True
+CRI,Costa Rica,Latin America & Caribbean,High income,IBRD,False,True
+CIV,Côte d’Ivoire,Sub-Saharan Africa,Lower middle income,Blend,True,True
+HRV,Croatia,Europe & Central Asia,High income,IBRD,False,True
+DJI,Djibouti,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IDA,True,False
+DMA,Dominica,Latin America & Caribbean,Upper middle income,Blend,True,True
+DOM,Dominican Republic,Latin America & Caribbean,Upper middle income,IBRD,False,True
+ECU,Ecuador,Latin America & Caribbean,Upper middle income,IBRD,False,True
+EGY,"Egypt, Arab Rep.","Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IBRD,False,True
+SLV,El Salvador,Latin America & Caribbean,Upper middle income,IBRD,False,True
+GNQ,Equatorial Guinea,Sub-Saharan Africa,Upper middle income,IBRD,False,True
+ERI,Eritrea,Sub-Saharan Africa,Low income,IDA,True,False
+SWZ,Eswatini,Sub-Saharan Africa,Lower middle income,Blend,True,True
+ETH,Ethiopia,Sub-Saharan Africa,,IDA,True,False
+FJI,Fiji,East Asia & Pacific,Upper middle income,Blend,True,True
+GAB,Gabon,Sub-Saharan Africa,Upper middle income,IBRD,False,True
+GMB,"Gambia, The",Sub-Saharan Africa,Low income,IDA,True,False
+GEO,Georgia,Europe & Central Asia,Upper middle income,IBRD,False,True
+GHA,Ghana,Sub-Saharan Africa,Lower middle income,IDA,True,False
+GRD,Grenada,Latin America & Caribbean,Upper middle income,Blend,True,True
+GTM,Guatemala,Latin America & Caribbean,Upper middle income,IBRD,False,True
+GIN,Guinea,Sub-Saharan Africa,Lower middle income,IDA,True,False
+GNB,Guinea-Bissau,Sub-Saharan Africa,Low income,IDA,True,False
+GUY,Guyana,Latin America & Caribbean,High income,IDA,True,False
+HTI,Haiti,Latin America & Caribbean,Lower middle income,IDA,True,False
+HND,Honduras,Latin America & Caribbean,Lower middle income,IDA,True,False
+IND,India,South Asia,Lower middle income,IBRD,False,True
+IDN,Indonesia,East Asia & Pacific,Upper middle income,IBRD,False,True
+IRN,"Iran, Islamic Rep.","Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,IBRD,False,True
+IRQ,Iraq,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,IBRD,False,True
+JAM,Jamaica,Latin America & Caribbean,Upper middle income,IBRD,False,True
+JOR,Jordan,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IBRD,False,True
+KAZ,Kazakhstan,Europe & Central Asia,Upper middle income,IBRD,False,True
+KEN,Kenya,Sub-Saharan Africa,Lower middle income,Blend,True,True
+KIR,Kiribati,East Asia & Pacific,Lower middle income,IDA,True,False
+XKX,Kosovo,Europe & Central Asia,Upper middle income,IDA,True,False
+KGZ,Kyrgyz Republic,Europe & Central Asia,Lower middle income,IDA,True,False
+LAO,Lao PDR,East Asia & Pacific,Lower middle income,IDA,True,False
+LBN,Lebanon,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IBRD,False,True
+LSO,Lesotho,Sub-Saharan Africa,Lower middle income,IDA,True,False
+LBR,Liberia,Sub-Saharan Africa,Low income,IDA,True,False
+LBY,Libya,"Middle East, North Africa, Afghanistan & Pakistan",Upper middle income,IBRD,False,True
+MDG,Madagascar,Sub-Saharan Africa,Low income,IDA,True,False
+MWI,Malawi,Sub-Saharan Africa,Low income,IDA,True,False
+MYS,Malaysia,East Asia & Pacific,Upper middle income,IBRD,False,True
+MDV,Maldives,South Asia,Upper middle income,IDA,True,False
+MLI,Mali,Sub-Saharan Africa,Low income,IDA,True,False
+MHL,Marshall Islands,East Asia & Pacific,Upper middle income,IDA,True,False
+MRT,Mauritania,Sub-Saharan Africa,Lower middle income,IDA,True,False
+MUS,Mauritius,Sub-Saharan Africa,Upper middle income,IBRD,False,True
+MEX,Mexico,Latin America & Caribbean,Upper middle income,IBRD,False,True
+FSM,"Micronesia, Fed. Sts.",East Asia & Pacific,Lower middle income,IDA,True,False
+MDA,Moldova,Europe & Central Asia,Upper middle income,IBRD,False,True
+MNG,Mongolia,East Asia & Pacific,Upper middle income,IBRD,False,True
+MNE,Montenegro,Europe & Central Asia,Upper middle income,IBRD,False,True
+MAR,Morocco,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IBRD,False,True
+MOZ,Mozambique,Sub-Saharan Africa,Low income,IDA,True,False
+MMR,Myanmar,East Asia & Pacific,Lower middle income,IDA,True,False
+NAM,Namibia,Sub-Saharan Africa,Lower middle income,IBRD,False,True
+NRU,Nauru,East Asia & Pacific,High income,IBRD,False,True
+NPL,Nepal,South Asia,Lower middle income,IDA,True,False
+NIC,Nicaragua,Latin America & Caribbean,Lower middle income,IDA,True,False
+NER,Niger,Sub-Saharan Africa,Low income,IDA,True,False
+NGA,Nigeria,Sub-Saharan Africa,Lower middle income,Blend,True,True
+MKD,North Macedonia,Europe & Central Asia,Upper middle income,IBRD,False,True
+PAK,Pakistan,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,Blend,True,True
+PLW,Palau,East Asia & Pacific,High income,IBRD,False,True
+PAN,Panama,Latin America & Caribbean,High income,IBRD,False,True
+PNG,Papua New Guinea,East Asia & Pacific,Lower middle income,Blend,True,True
+PRY,Paraguay,Latin America & Caribbean,Upper middle income,IBRD,False,True
+PER,Peru,Latin America & Caribbean,Upper middle income,IBRD,False,True
+PHL,Philippines,East Asia & Pacific,Lower middle income,IBRD,False,True
+POL,Poland,Europe & Central Asia,High income,IBRD,False,True
+ROU,Romania,Europe & Central Asia,High income,IBRD,False,True
+RUS,Russian Federation,Europe & Central Asia,High income,IBRD,False,True
+RWA,Rwanda,Sub-Saharan Africa,Low income,IDA,True,False
+WSM,Samoa,East Asia & Pacific,Upper middle income,IDA,True,False
+STP,São Tomé and Príncipe,Sub-Saharan Africa,Lower middle income,IDA,True,False
+SEN,Senegal,Sub-Saharan Africa,Lower middle income,IDA,True,False
+SRB,Serbia,Europe & Central Asia,Upper middle income,IBRD,False,True
+SYC,Seychelles,Sub-Saharan Africa,High income,IBRD,False,True
+SLE,Sierra Leone,Sub-Saharan Africa,Low income,IDA,True,False
+SLB,Solomon Islands,East Asia & Pacific,Lower middle income,IDA,True,False
+SOM,"Somalia, Fed. Rep.",Sub-Saharan Africa,Low income,IDA,True,False
+ZAF,South Africa,Sub-Saharan Africa,Upper middle income,IBRD,False,True
+SSD,South Sudan,Sub-Saharan Africa,Low income,IDA,True,False
+LKA,Sri Lanka,South Asia,Lower middle income,IDA,True,False
+KNA,St. Kitts and Nevis,Latin America & Caribbean,High income,IBRD,False,True
+LCA,St. Lucia,Latin America & Caribbean,Upper middle income,Blend,True,True
+VCT,St. Vincent and the Grenadines,Latin America & Caribbean,Upper middle income,Blend,True,True
+SDN,Sudan,Sub-Saharan Africa,Low income,IDA,True,False
+SUR,Suriname,Latin America & Caribbean,Upper middle income,Blend,True,True
+SYR,Syrian Arab Republic,"Middle East, North Africa, Afghanistan & Pakistan",Low income,IDA,True,False
+TJK,Tajikistan,Europe & Central Asia,Lower middle income,IDA,True,False
+TZA,Tanzania,Sub-Saharan Africa,Lower middle income,IDA,True,False
+THA,Thailand,East Asia & Pacific,Upper middle income,IBRD,False,True
+TLS,Timor-Leste,East Asia & Pacific,Lower middle income,Blend,True,True
+TGO,Togo,Sub-Saharan Africa,Low income,IDA,True,False
+TON,Tonga,East Asia & Pacific,Upper middle income,IDA,True,False
+TTO,Trinidad and Tobago,Latin America & Caribbean,High income,IBRD,False,True
+TUN,Tunisia,"Middle East, North Africa, Afghanistan & Pakistan",Lower middle income,IBRD,False,True
+TUR,Türkiye,Europe & Central Asia,Upper middle income,IBRD,False,True
+TKM,Turkmenistan,Europe & Central Asia,Upper middle income,IBRD,False,True
+TUV,Tuvalu,East Asia & Pacific,Upper middle income,IDA,True,False
+UGA,Uganda,Sub-Saharan Africa,Low income,IDA,True,False
+UKR,Ukraine,Europe & Central Asia,Upper middle income,IBRD,False,True
+URY,Uruguay,Latin America & Caribbean,High income,IBRD,False,True
+UZB,Uzbekistan,Europe & Central Asia,Lower middle income,Blend,True,True
+VUT,Vanuatu,East Asia & Pacific,Lower middle income,IDA,True,False
+VEN,"Venezuela, RB",Latin America & Caribbean,,IBRD,False,True
+VNM,Vietnam,East Asia & Pacific,Lower middle income,IBRD,False,True
+YEM,"Yemen, Rep.","Middle East, North Africa, Afghanistan & Pakistan",Low income,IDA,True,False
+ZMB,Zambia,Sub-Saharan Africa,Lower middle income,IDA,True,False
+ZWE,Zimbabwe,Sub-Saharan Africa,Lower middle income,Blend,True,True
