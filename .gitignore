@@ -209,3 +209,12 @@ __marimo__/
 # Project specific
 ppr-spend/data/raw/IHME*
 ppr-spend/data/raw/API_SP*
+
+# i-msa-rp-work-test: large IHME / candidate CSVs (rebuild locally)
+i-msa-rp-work-test/data/raw/*.CSV
+i-msa-rp-work-test/data/raw/*.csv
+i-msa-rp-work-test/data/candidate/*.CSV
+i-msa-rp-work-test/data/candidate/*.csv
+i-msa-rp-work-test/data/candidate/*.tmp
+i-msa-rp-work-test/data/**/*.CSV.tmp
+
